@@ -1,36 +1,176 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Users</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
 
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .user-info {
+      font-size: 14px;
+    }
+
+    nav {
+      width: 200px;
+      background-color: #f8f9fa;
+      padding-top: 20px;
+      height: 100vh;
+      position: fixed;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 10px 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+      padding: 10px;
+      display: block;
+    }
+
+    nav ul li a:hover {
+      background-color: #e9ecef;
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f8f9fa;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .btn {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+    }
+
+    .btn-warning {
+      background-color: #ffc107;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .logout {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+</head>
 <body>
-<h1>Users</h1>
-<table border="2">
-  <tr>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Age</th>
-  </tr>
-  <tr th:each="user : ${users}">
-    <td th:utext="${user.id}"></td>
-    <td th:utext="${user.name}"></td>
-    <td th:utext="${user.surname}"></td>
-    <td th:utext="${user.age}"></td>
-    <td><a class="btn btn-primary" th:href="@{/admin/getUser(id=${user.getId()})}">Open</a></td>
-    <td><a class="btn btn-warning" th:href="@{/admin/edit(id=${user.getId()})}">Edit</a></td>
-    <td><form th:method="DELETE" th:action="@{'/admin/' + ${user.getId()}}">
-      <input type="submit" class="buttonDelete" value="Delete"/>
-    </form></td>
-  </tr>
-</table>
-</br>
-<a th:href="@{/admin/create}">Add</a>
-</br>
-<a th:href="@{/logout}">Logout</a>
+<header>
+  <div class="user-info">admin@mail.ru with roles: ADMIN USER</div>
+  <a href="/logout" class="logout">Logout</a>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="/admin">Admin</a></li>
+    <li><a href="/user">User</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Admin panel</h1>
+  <div>
+    <a href="/admin/users" style="margin-right: 15px;">Users table</a>
+    <a href="/admin/new">New User</a>
+  </div>
+  <br>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>2</td>
+      <td>admin</td>
+      <td>admin</td>
+      <td>35</td>
+      <td>admin@mail.ru</td>
+      <td>ADMIN USER</td>
+      <td><a href="/admin/edit/2" class="btn btn-primary">Edit</a></td>
+      <td><a href="/admin/delete/2" class="btn btn-danger">Delete</a></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>user</td>
+      <td>user</td>
+      <td>30</td>
+      <td>user@mail.ru</td>
+      <td>USER</td>
+      <td><a href="/admin/edit/3" class="btn btn-primary">Edit</a></td>
+      <td><a href="/admin/delete/3" class="btn btn-danger">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+</main>
 </body>
 </html>
