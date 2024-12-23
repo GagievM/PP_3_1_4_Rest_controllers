@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
 <head>
-    <title>Spring Security Example</title>
+  <meta charset="UTF-8">
+  <title>Details</title>
 </head>
 <body>
 <b>Id</b>
 <p th:text="${user.getId()}">VALUE</p>
-<b>Username</b>
-<p th:text="${user.getUsername()}">VALUE</p>
 <b>Name</b>
 <p th:text="${user.getName()}"></p>
 <b>Surname</b>
 <p th:text="${user.getSurname()}">VALUE</p>
 <b>Age</b>
 <p th:text="${user.getAge()}">VALUE</p>
+</br>
+<a th:href="@{/admin}">Back</a>
 </br>
 <a th:href="@{/logout}">Logout</a>
 </body>
